@@ -3,8 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\User\TweetController;
 use App\Http\Controllers\Auth\SignupController;
+use App\Http\Controllers\Tweets\TweetController;
+use App\Http\Controllers\Users\FollowingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +27,18 @@ Route::post('login', [LoginController::class, 'login']);
 Route::prefix('users')->group(function () {
     Route::post('signup', [SignupController::class, 'signup']);
     Route::middleware('auth:sanctum')->group(function () {
-        Route::get('tweets', [TweetController::class, 'index']);
+        Route::get('{user_id}/tweets', [TweetController::class, 'index']);
         Route::post('tweets', [TweetController::class, 'store']);
-        // Route::get('tweets/{tweet}', [TweetController::class, 'show']);
-        // Route::put('tweets/{tweet}', [TweetController::class, 'update']);
-        // Route::delete('tweets/{tweet}', [TweetController::class, 'destroy']);
+        Route::get('tweets/{tweet}', [TweetController::class, 'show']);
+        Route::put('tweets/{tweet}', [TweetController::class, 'update']);
+        Route::delete('tweets/{tweet}', [TweetController::class, 'destroy']);
 
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        Route::get('user/follow', [FollowingController::class, 'index']);
+        Route::post('user/{user}/follow', [FollowingController::class, 'store']);
+        Route::delete('user/{user}/unfollow', [FollowingController::class, 'destroy']);
     });
 });
-

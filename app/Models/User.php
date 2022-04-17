@@ -39,6 +39,7 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+    // ->withTimestamps()
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -50,4 +51,18 @@ class User extends Authenticatable
     }
 
 
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followings', 'user_id', 'following_id')->withTimestamps();
+    }
+
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followings', 'following_id', 'user_id')->withTimestamps();
+    }
+
+
 }
+
+
