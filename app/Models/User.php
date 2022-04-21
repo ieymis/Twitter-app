@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -20,9 +22,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'username',
+        'phone',
         'email',
         'password',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -60,6 +64,15 @@ class User extends Authenticatable
     public function followers()
     {
         return $this->belongsToMany(User::class, 'followings', 'following_id', 'user_id')->withTimestamps();
+    }
+
+    // public function likedtweets(){
+    //     return $this->belongsToMany(Tweet::class, 'likes')->withPivot('is_dislike')->withTimestamps();
+    // }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
     }
 
 

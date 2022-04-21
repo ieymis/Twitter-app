@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Tweets\TweetController;
 use App\Http\Controllers\Users\FollowingController;
+use App\Http\Controllers\Tweets\TweetLikesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,11 @@ Route::prefix('users')->group(function () {
         Route::get('tweets/{tweet}', [TweetController::class, 'show']);
         Route::put('tweets/{tweet}', [TweetController::class, 'update']);
         Route::delete('tweets/{tweet}', [TweetController::class, 'destroy']);
+        // likes
+        Route::post('tweets/{tweet}/like', [TweetLikesController::class, 'store']);
+        Route::delete('tweets/{tweet}/unlike', [TweetLikesController::class, 'destroy']);
+
+
 
 
 
