@@ -46,6 +46,38 @@ class Tweet extends Model
     }
 
 
+    public function orignalTweet()
+    {
+        return $this->belongsTo(Tweet::class, 'orignalTweet', 'id');
+    }
+
+
+    public function retweets()
+    {
+        return $this->hasMany(Tweet::class, 'id', 'orignalTweet');
+    }
+
+
+    // public function comments()
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
+
+
+
+    // public function retweets()
+    // {
+    //     return $this->hasMany(Tweet::class, 'id');
+    // }
+
+
+
+// public function orignalTweet()
+// {
+
+
+// }
+
 
 
 

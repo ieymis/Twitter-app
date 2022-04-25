@@ -18,6 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('message');
             $table->timestamps();
+            // $table->unsignedBigInteger('orignal_tweet_id')->nullable();
+            // $table->unique(['user_id', 'orignal_tweet_id']);
+            // $table->foreign('orignal_tweet_id')->references('id')->on('tweets')->onDelete('cascade');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

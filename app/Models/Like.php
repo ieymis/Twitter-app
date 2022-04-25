@@ -21,7 +21,7 @@ class Like extends Model
     }
 
 
-    public function likeable()
+ public function likeable()
     {
         return $this->morphTo();
     }

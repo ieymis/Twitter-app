@@ -66,6 +66,7 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'followings', 'following_id', 'user_id')->withTimestamps();
     }
 
+
     // public function likedtweets(){
     //     return $this->belongsToMany(Tweet::class, 'likes')->withPivot('is_dislike')->withTimestamps();
     // }
@@ -75,7 +76,10 @@ class User extends Authenticatable
         return $this->morphMany(Like::class, 'likeable');
     }
 
+    // public function comments()
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
+
 
 }
-
-
